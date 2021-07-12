@@ -1,4 +1,4 @@
-package com.fededri.kmmdemo.networking
+package com.fededri.kmmdemo.models
 
 enum class MovieListType(val value: String) {
     POPULAR("popular"),

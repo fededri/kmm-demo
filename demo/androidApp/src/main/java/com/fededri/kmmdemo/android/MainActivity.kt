@@ -3,9 +3,8 @@ package com.fededri.kmmdemo.android
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.fededri.kmmdemo.networking.MovieListType
+import com.fededri.kmmdemo.models.MovieListType
 import com.fededri.kmmdemo.networking.TMDApi
 import kotlinx.coroutines.*
 

@@ -1,8 +1,8 @@
 package com.fededri.kmmdemo.networking
 
 import com.fededri.kmmdemo.ThreadInfo
-import com.fededri.kmmdemo.freeze
 import com.fededri.kmmdemo.models.Movie
+import com.fededri.kmmdemo.models.MovieListType
 import com.fededri.kmmdemo.networking.models.GetMoviesResponse
 import io.ktor.client.*
 import io.ktor.client.features.json.*
@@ -10,10 +10,9 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.observer.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 import kotlinx.serialization.json.Json as KotlinxJson
 
-class TMDApi(val threadInfo: ThreadInfo) {
+class TMDApi(private val threadInfo: ThreadInfo) {
 
     private val baseUrl = "https://api.themoviedb.org/3"
     private val apiKey: String = ""
@@ -21,7 +20,13 @@ class TMDApi(val threadInfo: ThreadInfo) {
     private val httpClient = HttpClient() {
 
         install(JsonFeature) {
-            val json = KotlinxJson { useAlternativeNames = false; ignoreUnknownKeys = true }
+            val json = KotlinxJson {
+                /**
+                 * Seems to be a bug where leaving this flag as true throws an InvalidMutabilityException
+                 */
+                useAlternativeNames = false
+                ignoreUnknownKeys = true
+            }
             serializer = KotlinxSerializer(json)
         }
 
@@ -41,11 +46,7 @@ class TMDApi(val threadInfo: ThreadInfo) {
             }
             val response =
                 httpClient.get<GetMoviesResponse>("${baseUrl}/movie/$listType") {
-                    headers {
-                        append("Accept", contentType)
-                    }
-
-                    parameter("api_key", apiKey)
+                   baseConfiguration()
                 }
             response.results.map {
                 Movie(name = it.title)
@@ -56,5 +57,13 @@ class TMDApi(val threadInfo: ThreadInfo) {
 
     fun dispose() {
         httpClient.close()
+    }
+
+    private fun HttpRequestBuilder.baseConfiguration(){
+        headers {
+            append("Accept", contentType)
+        }
+
+        parameter("api_key", apiKey)
     }
 }
