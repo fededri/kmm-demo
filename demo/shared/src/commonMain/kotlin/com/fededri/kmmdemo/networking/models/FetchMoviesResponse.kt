@@ -42,3 +42,7 @@ internal data class Result(
     @SerialName("vote_count")
     val voteCount: Int
 )
+
+internal fun Result.getPosterUrl() : String {
+    return "https://image.tmdb.org/t/p/original${this.posterPath}"
+}

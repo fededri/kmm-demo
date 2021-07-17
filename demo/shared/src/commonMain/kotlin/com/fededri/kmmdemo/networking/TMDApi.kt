@@ -4,6 +4,7 @@ import com.fededri.kmmdemo.ThreadInfo
 import com.fededri.kmmdemo.models.Movie
 import com.fededri.kmmdemo.models.MovieListType
 import com.fededri.kmmdemo.networking.models.GetMoviesResponse
+import com.fededri.kmmdemo.networking.models.getPosterUrl
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
@@ -15,7 +16,7 @@ import kotlinx.serialization.json.Json as KotlinxJson
 class TMDApi(private val threadInfo: ThreadInfo) {
 
     private val baseUrl = "https://api.themoviedb.org/3"
-    private val apiKey: String = ""
+    private val apiKey: String = "f2dd2ffff4c39e0f8005172a7b1e823d"
     private val contentType = "application/json;charset=utf-8"
     private val httpClient = HttpClient() {
 
@@ -49,7 +50,16 @@ class TMDApi(private val threadInfo: ThreadInfo) {
                    baseConfiguration()
                 }
             response.results.map {
-                Movie(name = it.title)
+                Movie(
+                    name = it.title,
+                    title = it.title,
+                    popularity = it.popularity,
+                    video = it.video,
+                    voteAverage = it.voteAverage,
+                    voteCount = it.voteCount,
+                    overview = it.overview,
+                    posterPath = it.getPosterUrl()
+                )
             }
         }
         return movies.await()
