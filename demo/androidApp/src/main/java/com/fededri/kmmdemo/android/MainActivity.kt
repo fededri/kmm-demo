@@ -23,6 +23,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        isFinishing
         setContent {
             MoviesScreen(viewModel.observeState())
         }
@@ -40,10 +41,4 @@ class MainActivity : ComponentActivity() {
            })
         }
     }
-
-    /*@Preview
-    @Composable
-    fun Preview() {
-        MoviesScreen()
-    }*/
 }

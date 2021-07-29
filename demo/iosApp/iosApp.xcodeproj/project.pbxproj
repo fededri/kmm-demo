@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0061D5FA26B220C900F485CD /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061D5F926B220C900F485CD /* MovieDetailView.swift */; };
+		00B1693E26A8ED5C005E8FFD /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1693D26A8ED5C005E8FFD /* AsyncImage.swift */; };
+		00B1694126A8ED8F005E8FFD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1694026A8ED8F005E8FFD /* ImageLoader.swift */; };
+		00B1694326A8EE03005E8FFD /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1694226A8EE03005E8FFD /* ImageCache.swift */; };
+		00B1694526A8EE31005E8FFD /* EnvironmentVales+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B1694426A8EE31005E8FFD /* EnvironmentVales+ImageCache.swift */; };
+		00B169AF26AA08A1005E8FFD /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B169AE26AA08A1005E8FFD /* DIContainer.swift */; };
 		00F7DB5A2698EC44002B92C8 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F7DB592698EC44002B92C8 /* MovieView.swift */; };
 		00F7DBBE269A3631002B92C8 /* MoviesListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F7DBBD269A3631002B92C8 /* MoviesListScreenView.swift */; };
 		00F7DBC0269A6310002B92C8 /* ThreadInfoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F7DBBF269A6310002B92C8 /* ThreadInfoImpl.swift */; };
@@ -16,6 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0061D5F926B220C900F485CD /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		00B1693D26A8ED5C005E8FFD /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		00B1694026A8ED8F005E8FFD /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		00B1694226A8EE03005E8FFD /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		00B1694426A8EE31005E8FFD /* EnvironmentVales+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentVales+ImageCache.swift"; sourceTree = "<group>"; };
+		00B169AE26AA08A1005E8FFD /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		00F7DB592698EC44002B92C8 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		00F7DBBD269A3631002B92C8 /* MoviesListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListScreenView.swift; sourceTree = "<group>"; };
 		00F7DBBF269A6310002B92C8 /* ThreadInfoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadInfoImpl.swift; sourceTree = "<group>"; };
@@ -40,10 +52,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00B1693F26A8ED7D005E8FFD /* AsyncImage */ = {
+			isa = PBXGroup;
+			children = (
+				00B1693D26A8ED5C005E8FFD /* AsyncImage.swift */,
+				00B1694026A8ED8F005E8FFD /* ImageLoader.swift */,
+				00B1694226A8EE03005E8FFD /* ImageCache.swift */,
+				00B1694426A8EE31005E8FFD /* EnvironmentVales+ImageCache.swift */,
+			);
+			path = AsyncImage;
+			sourceTree = "<group>";
+		};
+		00B169AD26AA0896005E8FFD /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				00B169AE26AA08A1005E8FFD /* DIContainer.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
 		00F7DB582698EC30002B92C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				00B1693F26A8ED7D005E8FFD /* AsyncImage */,
 				00F7DB592698EC44002B92C8 /* MovieView.swift */,
+				0061D5F926B220C900F485CD /* MovieDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -86,6 +119,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				00B169AD26AA0896005E8FFD /* DI */,
 				00F7DBBC269A3619002B92C8 /* Scenes */,
 				00F7DB582698EC30002B92C8 /* Views */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -198,11 +232,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B1693E26A8ED5C005E8FFD /* AsyncImage.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				00B169AF26AA08A1005E8FFD /* DIContainer.swift in Sources */,
+				00B1694326A8EE03005E8FFD /* ImageCache.swift in Sources */,
+				00B1694526A8EE31005E8FFD /* EnvironmentVales+ImageCache.swift in Sources */,
 				00F7DB5A2698EC44002B92C8 /* MovieView.swift in Sources */,
 				00F7DBC0269A6310002B92C8 /* ThreadInfoImpl.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				00B1694126A8ED8F005E8FFD /* ImageLoader.swift in Sources */,
 				00F7DBBE269A3631002B92C8 /* MoviesListScreenView.swift in Sources */,
+				0061D5FA26B220C900F485CD /* MovieDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,13 +371,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23F956432G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = fededri.kmm.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -350,13 +391,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 23F956432G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = fededri.kmm.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

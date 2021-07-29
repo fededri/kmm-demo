@@ -1,5 +1,6 @@
 package com.fededri.kmmdemo.arch
 
+import com.fededri.kmmdemo.FlowWrapper
 import com.fededri.kmmdemo.ThreadInfo
 import com.fededri.kmmdemo.arch.coroutines.DispatcherProvider
 import com.fededri.kmmdemo.arch.coroutines.EventsConfiguration
@@ -37,19 +38,19 @@ constructor(
         }
     }
 
-    fun observeState(): Flow<State> {
-        return state.asStateFlow()
+    fun observeState(): FlowWrapper<State> {
+        return FlowWrapper(state.asStateFlow())
     }
 
-    fun observeRenderState(): Flow<RenderState?> {
+    fun observeRenderState(): FlowWrapper<RenderState?> {
         check(stateMapper != null) {
             "In order to observe a RenderState, first you must pass a state mapper into the Arch's constructor"
         }
-        return renderState.asStateFlow()
+        return FlowWrapper(renderState.asStateFlow())
     }
 
-    fun observeEvents(): Flow<Event> {
-        return events.asSharedFlow()
+    fun observeEvents(): FlowWrapper<Event> {
+        return FlowWrapper(events.asSharedFlow())
     }
 
     override fun action(action: Action) {

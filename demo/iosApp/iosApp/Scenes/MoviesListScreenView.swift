@@ -10,35 +10,57 @@ import SwiftUI
 import shared
 
 struct MoviesListScreenView: View {
-    let api: TMDApi = TMDApi(threadInfo: ThreadInfoImpl())
+    @State var state: MoviesState?
+    @State var showMovieDetail: Bool = false
     
-    @State var movies: [Movie] = []
+    let viewModel = MoviesViewModel(threadInfo: ThreadInfoImpl())
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(movies, id: \.self) { movie in
-                    MovieView(movie: movie)
+                List() {
+                    ForEach(state?.movies ?? [], id: \.self) { movie in
+                        ZStack {
+                            MovieView(movie: movie)
+                            NavigationLink(destination: MovieDetailView(movie: state?.selectedMovie), isActive: $showMovieDetail, label: {
+                                EmptyView()
+                            }).hidden()
+                        }
+                    }
                 }
-            }
+            
             .navigationTitle("Movies")
             .toolbar(content: {
                 HStack {
-                    Button("asd") {
-                        
-                    }
-                    Button("Load movies") {
-                            api.getMovies(type: .popular) { movies, error in
-                                guard error == nil,
-                                      let movies = movies else  {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                self.movies = movies
-                            }
+                    Button("Randomize") {
+                        viewModel.action(action: .RandomizeMoviesList())
                     }
                 }
         })
+        }.onAppear(perform: {
+            DIContainer.shared.register(type: MoviesViewModel.self, component: viewModel)
+        
+            viewModel.observeState().collect { moviesState in
+                self.state = moviesState
+            } onCompletion: { error in
+                print(error as Any)
+            }
+            
+            viewModel.observeEvents().collect { event in
+                guard let event = event else { return }
+                processEvent(event: event)
+            } onCompletion: { error in
+                print(error as Any)
+            }
+
+        })
+    }
+    
+    private func processEvent(event: MovieEvents) {
+        switch event {
+        case let event as MovieEvents.OpenSelectedMovie :
+            self.showMovieDetail = true
+        default:
+            print("Event not recognized")
         }
     }
 }
