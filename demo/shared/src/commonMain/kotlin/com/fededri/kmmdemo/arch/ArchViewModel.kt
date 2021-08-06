@@ -20,7 +20,7 @@ constructor(
     eventsConfiguration: EventsConfiguration = EventsConfiguration(),
     private val coroutineExceptionHandler: CoroutineExceptionHandler? = null,
 
-    ) : ActionsDispatcher<Action> {
+    ) : ViewModel(), ActionsDispatcher<Action> {
 
     private val state = MutableStateFlow(initialState)
     private val events = MutableSharedFlow<Event>(
@@ -29,8 +29,6 @@ constructor(
         eventsConfiguration.backPressureStrategy
     )
     private val renderState by lazy { MutableStateFlow(stateMapper?.mapToRenderState(state.value)) }
-    private val viewModelScope: CoroutineScope =
-        CoroutineScope(DispatcherProvider.mainDispatcher() + SupervisorJob())
 
     init {
         if (initialEffects != null) {
