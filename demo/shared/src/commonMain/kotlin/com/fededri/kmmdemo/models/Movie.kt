@@ -1,7 +1,9 @@
 package com.fededri.kmmdemo.models
 
 import com.fededri.kmmdemo.freeze
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Movie(
     val name: String = "Harry Potter",
     val title: String = "Harry Potter and the prisoner of azkaban",

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/nav_movies"
+    android:id="@+id/main_nav">
+
+    <fragment
+        android:id="@+id/nav_movies"
+        android:name="com.fededri.kmmdemo.android.MoviesFragment"
+        android:label="Movies List" />
+
+    <fragment
+        android:id="@+id/nav_movie_detail"
+        android:name="com.fededri.kmmdemo.android.MovieDetailFragment"
+        android:label="Movie Detail"
+        />
+
+</navigation>

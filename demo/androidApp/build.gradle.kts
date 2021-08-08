@@ -13,8 +13,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
 
     //Jetpack compose
-    implementation ("androidx.activity:activity-compose:1.3.0-rc02")
-    implementation("androidx.compose.ui:ui:1.0.0-beta09"){
+    implementation ("androidx.activity:activity-compose:1.3.1")
+    implementation("androidx.compose.ui:ui:1.0.0"){
         version {
             // TODO: Remove this when Android Studio has become compatible again
             // Android Studio Bumblebee | 2021.1.1 Canary 3 is not compatible with module ui-tooling 1.0.0-rc01 or higher.
@@ -22,15 +22,19 @@ dependencies {
             // in the `androidx.compose.ui.tooling.preview` package, but it was moved in 1.0.0-rc01, and thus causes error:
             // "androidx.compose.ui.tooling.preview.PreviewActivity is not an Activity subclass or alias".
             // For more, see: https://stackoverflow.com/questions/68224361/jetpack-compose-cant-preview-after-updating-to-1-0-0-rc01
-            strictly("1.0.0-beta09")
+            strictly("1.0.0")
         }
     }
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
 
     //Image loading
     implementation("io.coil-kt:coil-compose:1.3.0")
 
+    // Compose View Binding
+    implementation("androidx.compose.ui:ui-viewbinding:1.0.1")
+
     // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:1.0.0-rc02")
+    implementation("androidx.compose.ui:ui-tooling:1.0.1")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation("androidx.compose.foundation:foundation:1.0.0-rc02")
     // Material Design
@@ -41,6 +45,9 @@ dependencies {
     // Integration with observables
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0-rc02")
     implementation("androidx.compose.runtime:runtime-rxjava2:1.0.0-rc02")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.4")
 }
 
 android {
@@ -55,6 +62,7 @@ android {
 
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 
     compileOptions {

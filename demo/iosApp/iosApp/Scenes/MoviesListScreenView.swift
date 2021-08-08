@@ -17,16 +17,18 @@ struct MoviesListScreenView: View {
     
     var body: some View {
         NavigationView {
-                List() {
-                    ForEach(state?.movies ?? [], id: \.self) { movie in
-                        ZStack {
-                            MovieView(movie: movie)
-                            NavigationLink(destination: MovieDetailView(movie: state?.selectedMovie), isActive: $showMovieDetail, label: {
-                                EmptyView()
-                            }).hidden()
-                        }
+            List() {
+                ForEach(state?.movies ?? [], id: \.self) { movie in
+                    ZStack {
+                        MovieView(movie: movie, onMovieClickListener: { selectedMovie in
+                            viewModel.action(action: .SelectMovie(movie: selectedMovie))
+                        })
+                        NavigationLink(destination: MovieDetailView(movie: state?.selectedMovie), isActive: $showMovieDetail, label: {
+                            EmptyView()
+                        }).hidden()
                     }
                 }
+            }
             
             .navigationTitle("Movies")
             .toolbar(content: {
@@ -35,10 +37,10 @@ struct MoviesListScreenView: View {
                         viewModel.action(action: .RandomizeMoviesList())
                     }
                 }
-        })
+            })
         }.onAppear(perform: {
             DIContainer.shared.register(type: MoviesViewModel.self, component: viewModel)
-        
+            
             viewModel.observeState().collect { moviesState in
                 self.state = moviesState
             } onCompletion: { error in
@@ -51,7 +53,7 @@ struct MoviesListScreenView: View {
             } onCompletion: { error in
                 print(error as Any)
             }
-
+            
         })
     }
     

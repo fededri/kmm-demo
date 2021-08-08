@@ -11,8 +11,7 @@ import shared
 
 struct MovieView: View {
     let movie: Movie
-    let viewModel: MoviesViewModel! =
-        DIContainer.shared.resolve(type: MoviesViewModel.self)
+    var onMovieClickListener: ((Movie) -> (Void))? = nil
     
     var body: some View {
         HStack {
@@ -51,7 +50,8 @@ struct MovieView: View {
         .background(Color.red.opacity(0.5))
         .cornerRadius(6.0)
         .onTapGesture {
-            viewModel.action(action: .SelectMovie(movie: movie))
+            guard let listener = onMovieClickListener else { return }
+            listener(movie)
         }
         //: MAIN HSTACK
     }

@@ -1,39 +1,42 @@
 package com.fededri.kmmdemo.android.views
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.Card
+import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import com.fededri.kmmdemo.android.R
 import com.fededri.kmmdemo.models.Movie
 
 @Composable
-fun MovieView(movie: Movie) {
+fun MovieView(movie: Movie, onMovieClick: ((Movie) -> Unit)? = null) {
     Card(
         shape = MaterialTheme.shapes.medium,
         backgroundColor = Color.Red.copy(alpha = 0.5f),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()
+            .clickable {
+                onMovieClick?.invoke(movie)
+            }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.padding(horizontal = 4.dp)) {
                 Spacer(Modifier.padding(4.dp))
                 Image(
-                    painter = rememberImagePainter(data = movie.posterPath!!,
+                    painter = rememberImagePainter(data = movie.posterPath.orEmpty(),
                         builder = {
                             transformations(CircleCropTransformation())
                             crossfade(true)
@@ -62,4 +65,10 @@ fun MovieView(movie: Movie) {
             }
         }
     }
+}
+
+@Preview(widthDp = 400, heightDp = 120)
+@Composable
+fun MoviePreview(){
+    MovieView(movie = Movie())
 }
