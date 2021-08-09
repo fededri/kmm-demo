@@ -30,6 +30,9 @@ dependencies {
     //Image loading
     implementation("io.coil-kt:coil-compose:1.3.0")
 
+    // Compose constraint layout
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02")
+
     // Compose View Binding
     implementation("androidx.compose.ui:ui-viewbinding:1.0.1")
 

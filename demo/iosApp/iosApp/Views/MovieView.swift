@@ -25,7 +25,6 @@ struct MovieView: View {
             
             
             VStack(alignment: .leading, spacing: 15) {
-                //Movie name
                 Text(movie.name)
                     .foregroundColor(.white)
                     .fontWeight(.bold)

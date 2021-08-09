@@ -8,5 +8,6 @@ sealed class MoviesActions {
     data class SaveMovies(val movies: List<Movie>) : MoviesActions()
 
     data class SelectMovie(val movie: Movie) : MoviesActions()
+    object DeselectMovie : MoviesActions()
     object RandomizeMoviesList : MoviesActions()
 }

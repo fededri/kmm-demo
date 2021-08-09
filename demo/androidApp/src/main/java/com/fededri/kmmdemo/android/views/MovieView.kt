@@ -24,7 +24,7 @@ import com.fededri.kmmdemo.models.Movie
 fun MovieView(movie: Movie, onMovieClick: ((Movie) -> Unit)? = null) {
     Card(
         shape = MaterialTheme.shapes.medium,
-        backgroundColor = Color.Red.copy(alpha = 0.5f),
+        backgroundColor = Color(0xFFFF5722).copy(alpha = 0.7f),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxSize()

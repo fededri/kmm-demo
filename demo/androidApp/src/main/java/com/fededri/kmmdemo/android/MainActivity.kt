@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.fragment.app.viewModels
@@ -27,6 +29,7 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.fededri.kmmdemo.android.databinding.ContentMainBinding
 import com.fededri.kmmdemo.android.views.MovieView
 import com.fededri.kmmdemo.models.Movie
@@ -39,9 +42,15 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+val AppColors = lightColors(
+    primary = Color(0xffed4f11),
+    secondary = Color(0xFFEE6A37)
+)
+
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MoviesViewModel by viewModels { ViewModelFactory(ThreadInfoImpl) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,23 +62,60 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun App() {
+        val state by viewModel.observeState().collectAsState(initial = MoviesState())
         LaunchedEffect(viewModel) {
+            Log.i("Movies", "collecting events")
             viewModel.observeEvents().collect { event ->
                 processEvent(event)
             }
         }
 
-        Scaffold(topBar = {
-            TopAppBar(title = {
-                Text(text = "Movies")
-            }, navigationIcon = {
-                IconButton(onClick = { viewModel.action(MoviesActions.RandomizeMoviesList) }) {
-                    Icon(Icons.Filled.Shuffle, "Shuffle")
-                }
-            })
-        }) {
-            AndroidViewBinding(ContentMainBinding::inflate)
+        MaterialTheme(colors = AppColors) {
+            Scaffold(topBar = { Toolbar(state = state) }) {
+                AndroidViewBinding(ContentMainBinding::inflate)
+            }
         }
+    }
+
+    @Composable
+    fun Toolbar(state: MoviesState) {
+        val isShowingMovieDetail = state.selectedMovie != null
+        if (isShowingMovieDetail) {
+            MovieDetailTopBar(state = state)
+        } else {
+            MoviesListTopBar(state = state)
+        }
+    }
+
+    @Composable
+    fun MoviesListTopBar(state: MoviesState) {
+        TopAppBar(title = {
+            Text(text = "Movies")
+        }, actions = {
+            IconButton(onClick = { viewModel.action(MoviesActions.RandomizeMoviesList) }) {
+                Icon(Icons.Filled.Shuffle, "Shuffle")
+            }
+        }, navigationIcon = {
+            if (state.selectedMovie != null) {
+                IconButton(onClick = { findNavController().navigateUp() }) {
+                    Icon(Icons.Filled.ArrowBack, "Back")
+                }
+            }
+        })
+    }
+
+    @Composable
+    fun MovieDetailTopBar(state: MoviesState) {
+        TopAppBar(title = {
+            Text(text = state.selectedMovie?.title.orEmpty())
+        }, navigationIcon = {
+            IconButton(onClick = {
+                viewModel.action(MoviesActions.DeselectMovie)
+                findNavController().navigateUp()
+            }) {
+                Icon(Icons.Filled.ArrowBack, "Back")
+            }
+        })
     }
 
     @Composable

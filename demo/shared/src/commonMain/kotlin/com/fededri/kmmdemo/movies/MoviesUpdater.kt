@@ -15,6 +15,7 @@ class MoviesUpdater : Updater<MoviesActions, MoviesState, MoviesEffects, MovieEv
             is MoviesActions.SaveMovies -> saveMovies(action, currentState)
             is MoviesActions.SelectMovie -> selectMovie(action, currentState)
             is MoviesActions.RandomizeMoviesList -> randomize(action, currentState)
+            is MoviesActions.DeselectMovie -> Next.State(currentState.copy(selectedMovie = null))
         }
     }
 

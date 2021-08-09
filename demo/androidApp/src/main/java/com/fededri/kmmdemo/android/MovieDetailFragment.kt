@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.fededri.kmmdemo.movies.MoviesActions
 import com.fededri.kmmdemo.movies.MoviesState
 import com.fededri.kmmdemo.movies.MoviesViewModel
 
@@ -35,6 +35,7 @@ class MovieDetailFragment : Fragment() {
             val movie = state.selectedMovie
             if (movie != null) {
                 MovieDetailScreen(movie = movie, onBack = {
+                    viewModel.action(MoviesActions.DeselectMovie)
                     findNavController().navigateUp()
                 })
             } else {
