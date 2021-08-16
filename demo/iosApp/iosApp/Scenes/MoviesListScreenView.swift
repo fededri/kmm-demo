@@ -10,7 +10,7 @@ import SwiftUI
 import shared
 
 struct MoviesListScreenView: View {
-    @State var state: MoviesState?
+    @State var state: MoviesState = MoviesState(movies: [], selectedMovie: nil)
     @State var showMovieDetail: Bool = false
     
     let viewModel = MoviesViewModel(threadInfo: ThreadInfoImpl())
@@ -18,14 +18,16 @@ struct MoviesListScreenView: View {
     var body: some View {
         NavigationView {
             List() {
-                ForEach(state?.movies ?? [], id: \.self) { movie in
+                ForEach(state.movies, id: \.self) { movie in
                     ZStack {
                         MovieView(movie: movie, onMovieClickListener: { selectedMovie in
                             viewModel.action(action: .SelectMovie(movie: selectedMovie))
                         })
-                        NavigationLink(destination: MovieDetailView(movie: state?.selectedMovie), isActive: $showMovieDetail, label: {
-                            EmptyView()
-                        }).hidden()
+                        if let selectedMovie = state.selectedMovie {
+                            NavigationLink(destination: MovieDetailView(movie: selectedMovie), isActive: $showMovieDetail, label: {
+                                EmptyView()
+                            }).hidden()
+                        }
                     }
                 }
             }
@@ -33,16 +35,19 @@ struct MoviesListScreenView: View {
             .navigationTitle("Movies")
             .toolbar(content: {
                 HStack {
-                    Button("Randomize") {
+                    Button(action: {
                         viewModel.action(action: .RandomizeMoviesList())
-                    }
+                    }, label: {
+                        Image(systemName: "shuffle")
+                    })
                 }
             })
         }.onAppear(perform: {
             DIContainer.shared.register(type: MoviesViewModel.self, component: viewModel)
             
             viewModel.observeState().collect { moviesState in
-                self.state = moviesState
+                guard let newState = moviesState else { return }
+                self.state = newState
             } onCompletion: { error in
                 print(error as Any)
             }

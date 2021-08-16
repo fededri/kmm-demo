@@ -11,11 +11,11 @@ import shared
 
 struct MovieDetailView: View {
     
-    let movie: Movie?
+    let movie: Movie
     var body: some View {
-        VStack() {
+        VStack(alignment: .leading) {
             AsyncImage(
-                url: URL(string: movie!.posterPath!)!,
+                url: URL(string: movie.posterPath!)!,
                 placeholder: {
                     Color.red.opacity(0.5)
                 },
@@ -24,6 +24,32 @@ struct MovieDetailView: View {
             )
             .frame(height: 300)
             .aspectRatio(contentMode: .fit)
+            
+            HStack {
+                Spacer()
+                Text(movie.title)
+                    .fontWeight(.bold)
+                    .padding(.vertical, 8)
+                    .frame(alignment: .center)
+                
+                Spacer()
+            }
+            
+            Text(movie.overview)
+                .italic()
+                .padding(.vertical, 8)
+                .padding(.horizontal, 8)
+                .frame(alignment: .center)
+            
+            HStack() {
+                Text("Popularity:")
+                    .fontWeight(.bold)
+                Text(String(movie.popularity))
+                    
+            }
+            .padding(.horizontal, 4)
+            
+            
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
     }
 }

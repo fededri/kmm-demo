@@ -36,8 +36,11 @@ struct MovieView: View {
                 HStack {
                     Text("Score:")
                         .padding(.horizontal, 2)
+                        .foregroundColor(.white)
                     
                     Text(String(movie.voteAverage))
+                        .foregroundColor(.white)
+                    
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
                 }
