@@ -1,7 +1,8 @@
 package com.fededri.kmmdemo.movies
 
-import com.fededri.kmmdemo.arch.Next
-import com.fededri.kmmdemo.arch.interfaces.Updater
+import io.github.fededri.arch.Next
+import io.github.fededri.arch.interfaces.Updater
+
 
 typealias  NextResult = Next<MoviesState, MoviesEffects, MovieEvents>
 

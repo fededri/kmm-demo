@@ -2,45 +2,25 @@ package com.fededri.kmmdemo.android
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
-import com.fededri.kmmdemo.models.MovieListType
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidViewBinding
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.fededri.kmmdemo.android.databinding.ContentMainBinding
-import com.fededri.kmmdemo.android.views.MovieView
-import com.fededri.kmmdemo.models.Movie
 import com.fededri.kmmdemo.movies.MovieEvents
 import com.fededri.kmmdemo.movies.MoviesActions
 import com.fededri.kmmdemo.movies.MoviesState
 import com.fededri.kmmdemo.movies.MoviesViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 val AppColors = lightColors(
     primary = Color(0xffed4f11),

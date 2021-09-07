@@ -1,8 +1,9 @@
 package com.fededri.kmmdemo.movies
 
+
 import com.fededri.kmmdemo.arch.coroutines.DispatcherProvider
-import com.fededri.kmmdemo.arch.interfaces.SideEffectInterface
 import com.fededri.kmmdemo.models.MovieListType
+import io.github.fededri.arch.interfaces.SideEffectInterface
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 

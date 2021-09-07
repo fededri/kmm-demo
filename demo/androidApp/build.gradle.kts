@@ -87,4 +87,7 @@ android {
             isMinifyEnabled = false
         }
     }
+    packagingOptions {
+        exclude( "META-INF/shared_debug.kotlin_module")
+    }
 }

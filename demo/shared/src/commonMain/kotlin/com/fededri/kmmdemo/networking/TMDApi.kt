@@ -1,10 +1,10 @@
 package com.fededri.kmmdemo.networking
 
-import com.fededri.kmmdemo.ThreadInfo
 import com.fededri.kmmdemo.models.Movie
 import com.fededri.kmmdemo.models.MovieListType
 import com.fededri.kmmdemo.networking.models.GetMoviesResponse
 import com.fededri.kmmdemo.networking.models.getPosterUrl
+import io.github.fededri.arch.ThreadInfo
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*

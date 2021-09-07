@@ -1,7 +1,7 @@
 package com.fededri.kmmdemo.android
 
 import android.os.Looper
-import com.fededri.kmmdemo.ThreadInfo
+import io.github.fededri.arch.ThreadInfo
 
 object ThreadInfoImpl : ThreadInfo {
     override fun isMainThread(): Boolean {

@@ -11,7 +11,6 @@ class FlowWrapper<T>(private val source: Flow<T>) : Flow<T> by source {
 
     fun collect(onEach: (T) -> Unit, onCompletion: (cause: Throwable?) -> Unit): Cancellable {
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-
         scope.launch {
             try {
                 collect {

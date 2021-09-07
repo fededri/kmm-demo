@@ -1,9 +1,9 @@
 package com.fededri.kmmdemo.movies
 
-import com.fededri.kmmdemo.ThreadInfo
-import com.fededri.kmmdemo.arch.Next
-import com.fededri.kmmdemo.arch.interfaces.Processor
+
 import com.fededri.kmmdemo.networking.TMDApi
+import io.github.fededri.arch.ThreadInfo
+import io.github.fededri.arch.interfaces.Processor
 
 class MoviesProcessor(threadInfo: ThreadInfo) : Processor<MoviesEffects, MoviesActions> {
 
